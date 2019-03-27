@@ -23,8 +23,9 @@ public class Main extends Application {
 			/*
 			 * Create and set the model here!
 			 */
-			 Model model=new Model();
-			 controller.setModel(model);
+			Model model=new Model();
+			controller.setModel(model);
+			 
 
 			
 			primaryStage.show();

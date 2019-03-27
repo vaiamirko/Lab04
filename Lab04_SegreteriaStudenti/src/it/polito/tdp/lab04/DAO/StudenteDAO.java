@@ -23,6 +23,7 @@ public class StudenteDAO {
 			ResultSet rs=st.executeQuery();
 			
 			while(rs.next()) {
+				
 				String nome=rs.getString("nome");
 				String cognome=rs.getString("cognome");
 				stu=new Studente(id,nome,cognome);
@@ -30,18 +31,15 @@ public class StudenteDAO {
 			
 			}
 			conn.close();
-			 return stu;
-		} 
 		
-		
-		catch (SQLException e) {
+		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException("Errore Db");
 			
 			
 		}
 		
-		
+		 return stu;
 		
 		
 		

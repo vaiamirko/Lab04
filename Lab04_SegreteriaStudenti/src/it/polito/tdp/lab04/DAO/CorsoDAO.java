@@ -56,14 +56,63 @@ public class CorsoDAO {
 	 */
 	public void getCorso(Corso corso) {
 		// TODO
+		
+		
+		
+		
+		
 	}
 
 	/*
 	 * Ottengo tutti gli studenti iscritti al Corso
 	 */
-	public void getStudentiIscrittiAlCorso(Corso corso) {
+	public List<Studente> getStudentiIscrittiAlCorso(Corso corso) {
+		
+		
+		
+		/*
+		 * Ottengo tutti gli studenti iscriti al corso corso
+		 */
+		
+
+			final String sql = "SELECT matricola,cognome,nome " + 
+					"FROM iscrizione natural INNER JOIN STUDENTE " + 
+					"where codins=?";
+
+			List<Studente> studenti = new LinkedList<Studente>();
+
+			try {
+				Connection conn = ConnectDB.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setString(1, corso.getCodins());
+
+				ResultSet rs = st.executeQuery();
+
+				while (rs.next()) {
+					
+					String matricola= rs.getString("matricola");
+					String nome = rs.getString("nome");
+					String cognome=rs.getString("cognome");
+					Studente stu=new Studente(Integer.parseInt(matricola),nome,cognome);
+					System.out.println(matricola +  " " + nome + " " + cognome);
+					studenti.add(stu);
+					
+
+					
+				}
+				conn.close();
+				return studenti;
+
+			} catch (SQLException e) {
+				// e.printStackTrace();
+				throw new RuntimeException("Errore Db");
+			}
+		}
+		
+		
+		
 		// TODO
-	}
+	
 
 	/*
 	 * Data una matricola ed il codice insegnamento, iscrivi lo studente al corso.

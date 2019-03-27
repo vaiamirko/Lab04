@@ -18,7 +18,7 @@ import javafx.event.ActionEvent;
 	import javafx.scene.control.TextField;
 
 	public class SegreteriaStudentiController {
-		 private Model model;
+		  private Model model=new Model();
 		ObservableList<Corso> corsiBoxList = FXCollections.observableArrayList(model.listacorsipermenu()); 
 		
 	    @FXML
@@ -66,31 +66,33 @@ import javafx.event.ActionEvent;
 
 	    @FXML
 	    void Cercaiscriticorso(ActionEvent event) {
+	    	Corso cor;
+	    	cor=ChoiceBox.getValue();
+	    	txtResult.appendText(model.studenti(model.listastudentipercorso(cor)));
 
 	    }
 
 	    @FXML
 	    void Completacampi(ActionEvent event) {
-	    	String ids=txtId.getText();
-	    	try { int id=Integer.parseInt(ids);
+	    	 	String ids=txtId.getText();
+	    	 	int id;
+	    	 	try{
+	    	 		id=Integer.parseInt(ids);
+	    	 	}catch(NumberFormatException e) {
+	    	 		txtResult.appendText("inserita matricola con formato errato");
+	    	 		return;
+	    	 	}
+	    	 	
 	    		Studente stu;
-	    		stu=model.getStudenteinfo(id);
-	    		
-				
-				if(model.getStudenteinfo(id).equals(null))
-					return;
-	    			
+	    		stu=this.model.getStudenteinfo(id);	
 	    		txtNome.appendText(stu.getNome());
 	    		txtCognome.appendText(stu.getCognome());
 	    	
-	    	}catch(NumberFormatException e){
-	    		throw e;
-	    		
-	    		
 	    	}
-	    	
+	    	 		    	
 
-	    }
+
+	  
 
 	    @FXML
 	    void Iscrivistudente(ActionEvent event) {
@@ -119,7 +121,7 @@ import javafx.event.ActionEvent;
 	        txtCognome.setDisable(true);
 	    }
 
-		public void setModel(Model model) {
+	    public void setModel(Model model) {
 			this.model=model;
 			// TODO Auto-generated method stub
 			

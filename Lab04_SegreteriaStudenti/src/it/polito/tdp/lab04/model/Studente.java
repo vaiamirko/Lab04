@@ -48,6 +48,14 @@ public class Studente {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return String.format("Studente [id=%s, nome=%s, cognome=%s]", id, nome, cognome);
+	}
+	
+	
+	
+	
 	
 	
 }

@@ -12,9 +12,7 @@ public class Model {
 	 */
 	public List<Corso> listacorsipermenu(){
 		CorsoDAO cdao=new CorsoDAO();
-		Corso corso = null;
-		List<Corso> corsimenu=cdao.getTuttiICorsi();
-		corsimenu.add(corso);
+		
 		return cdao.getTuttiICorsi();
 		
 	}
@@ -23,6 +21,20 @@ public class Model {
 		
 		
 		return stuDAO.getStudente(id);
+		
+	}
+	public List<Studente> listastudentipercorso(Corso corso){
+		CorsoDAO cdao=new CorsoDAO();
+		return cdao.getStudentiIscrittiAlCorso(corso);
+		
+	}
+	public String studenti(List<Studente> listastudenti) {
+		String s="";
+		for(Studente stu:listastudenti)
+			s+=stu.toString()+"\n";
+		return s;
+		
+		
 		
 	}
 	
