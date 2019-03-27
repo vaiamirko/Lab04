@@ -61,6 +61,8 @@ import javafx.event.ActionEvent;
 
 	    @FXML
 	    void CercaCorsi(ActionEvent event) {
+	    	int matricola=Integer.parseInt(txtId.getText());
+	    	txtResult.appendText(model.corsi(model.listacorsifreq(matricola)));
 
 	    }
 

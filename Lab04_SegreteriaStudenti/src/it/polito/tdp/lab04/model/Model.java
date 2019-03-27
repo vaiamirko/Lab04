@@ -28,14 +28,38 @@ public class Model {
 		return cdao.getStudentiIscrittiAlCorso(corso);
 		
 	}
+	/**
+	 * trasformo la lista studenti in una stringa da mettere nell'appendtext
+	 * @param listastudenti
+	 * @return
+	 */
 	public String studenti(List<Studente> listastudenti) {
 		String s="";
 		for(Studente stu:listastudenti)
 			s+=stu.toString()+"\n";
 		return s;
-		
+		}
+	
+	public List<Corso> listacorsifreq(int id){
+		StudenteDAO stuDAO=new StudenteDAO();
+		return stuDAO.getcorsi(id);
 		
 		
 	}
+	/**
+	 * trafosmo la lista corsi in una stringa da mettere nell'append txt
+	 * @param listacorsi
+	 * @return
+	 */
+	public String corsi(List<Corso> listacorsi) {
+		String c="";
+		for(Corso cors:listacorsi)
+			c+=cors.toString()+"\n";
+		return c;
+		}
+	
+		
+		
+	
 	
 }
