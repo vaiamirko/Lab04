@@ -10,6 +10,9 @@ public class TestDB {
 		
 		CorsoDAO cdao = new CorsoDAO();
 		cdao.getTuttiICorsi();
+		
+		StudenteDAO studao=new StudenteDAO();
+		studao.getStudente(146101);
 
 	}
 
