@@ -118,8 +118,55 @@ public class CorsoDAO {
 	 * Data una matricola ed il codice insegnamento, iscrivi lo studente al corso.
 	 */
 	public boolean inscriviStudenteACorso(Studente studente, Corso corso) {
+		
 		// TODO
 		// ritorna true se l'iscrizione e' avvenuta con successo
 		return false;
 	}
+	public boolean controllaIscrizione(int id,Corso corso) {
+
+		final String sql = "SELECT matricola,codins,crediti,nome,pd " + 
+				"FROM iscrizione natural INNER JOIN corso " + 
+				"WHERE matricola=? AND codins=? ";
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(2, corso.getCodins());
+			st.setInt(1, id);
+
+			ResultSet rs = st.executeQuery();
+           boolean check=false;
+           // se entra nel ciclo while vuol dire che la uery non è nulla quindi lo studente è iscritto al corso
+			while (rs.next()) {
+				int matricola=rs.getInt("matricola");
+				String codice=rs.getString("codins");
+				if(rs.getInt("matricola")==0 || rs.getString("codins").equals(null)==true){
+					check=false;
+					
+				}
+					
+				check=true;
+
+				
+			}
+			conn.close();
+			return check;
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException("Errore Db");
+		}
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
 }

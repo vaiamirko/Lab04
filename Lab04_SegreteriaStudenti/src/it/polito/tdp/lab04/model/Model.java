@@ -1,5 +1,6 @@
 package it.polito.tdp.lab04.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import it.polito.tdp.lab04.DAO.CorsoDAO;
@@ -13,7 +14,11 @@ public class Model {
 	public List<Corso> listacorsipermenu(){
 		CorsoDAO cdao=new CorsoDAO();
 		
-		return cdao.getTuttiICorsi();
+		List<Corso> listacorsi=new LinkedList<Corso>();
+		listacorsi.addAll(cdao.getTuttiICorsi());
+		listacorsi.add(null);
+		
+		return listacorsi;
 		
 	}
 	public Studente getStudenteinfo(int id) {
@@ -57,6 +62,12 @@ public class Model {
 			c+=cors.toString()+"\n";
 		return c;
 		}
+	public boolean isIscritto(int id,Corso corso) {
+		CorsoDAO cdao=new CorsoDAO();
+		return cdao.controllaIscrizione(id, corso);
+		
+		
+	}
 	
 		
 		

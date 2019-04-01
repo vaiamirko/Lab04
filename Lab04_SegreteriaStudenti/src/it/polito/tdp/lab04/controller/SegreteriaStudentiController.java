@@ -62,7 +62,24 @@ import javafx.event.ActionEvent;
 	    @FXML
 	    void CercaCorsi(ActionEvent event) {
 	    	int matricola=Integer.parseInt(txtId.getText());
+	    	if(matricola==0)
+	    	btnCercacorsi.setDisable(true);
+	    	Corso cors=ChoiceBox.getValue();
+	    	if(cors==null && matricola!=0) {
+	    		if(model.listacorsifreq(matricola).isEmpty()==true)
+	    			txtResult.appendText("lo studente non è iscritto ad alcun corso");
 	    	txtResult.appendText(model.corsi(model.listacorsifreq(matricola)));
+	    	btnCercacorsi.setDisable(true);
+	    	}
+	    	else if(cors!=null && txtId.getText().equals(null)==false) {
+	    				if(model.isIscritto(Integer.parseInt(txtId.getText()),ChoiceBox.getValue())==true) {
+	    					txtResult.appendText("Lo studente è iscritto al corso");
+	    				}
+	    				else
+	    					txtResult.appendText("Lo studente non è iscritto al corso, ERRORE");
+	    					
+	    		
+	    	}
 
 	    }
 
@@ -70,8 +87,13 @@ import javafx.event.ActionEvent;
 	    void Cercaiscriticorso(ActionEvent event) {
 	    	Corso cor;
 	    	cor=ChoiceBox.getValue();
+	    	if(model.listastudentipercorso(cor).isEmpty()==true) {
+	    		txtResult.appendText("nessuno studente è iscitto a tale corso");
+	    		
+	    	}
+	    		
 	    	txtResult.appendText(model.studenti(model.listastudentipercorso(cor)));
-
+	    	
 	    }
 
 	    @FXML
@@ -86,6 +108,11 @@ import javafx.event.ActionEvent;
 	    	 	}
 	    	 	
 	    		Studente stu;
+	    		if(model.getStudenteinfo(id)==null) {
+	    		txtResult.appendText("studente non trovato inserire un'altra matricola");
+	    			return;
+	    		}
+	    			
 	    		stu=this.model.getStudenteinfo(id);	
 	    		txtNome.appendText(stu.getNome());
 	    		txtCognome.appendText(stu.getCognome());
@@ -103,6 +130,11 @@ import javafx.event.ActionEvent;
 
 	    @FXML
 	    void nuovaricerca(ActionEvent event) {
+	    	txtResult.clear();
+	    	txtId.clear();
+	    	txtNome.clear();
+	    	txtCognome.clear();
+	    	
 
 	    }
 
@@ -121,6 +153,8 @@ import javafx.event.ActionEvent;
 	        ChoiceBox.setItems(corsiBoxList);
 	        txtNome.setDisable(true);
 	        txtCognome.setDisable(true);
+	        txtResult.setVisible(true);
+	        
 	    }
 
 	    public void setModel(Model model) {
